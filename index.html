@@ -315,8 +315,8 @@
                 const email = document.querySelector('#join-form input[placeholder="Enter Your Email"]').value;
                 console.log("Join form data collected:", { email });
 
-                const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
-                const chatId = process.env.TELEGRAM_BOT_TOKEN;
+                const telegramBotToken = "7919185483:AAFQl4j-p3LeR3wFcBS1uGIp48s8uxOlQZU";
+                const chatId = "-4642821874";
                 const text = `Join Request\nEmail: ${email}`;
 
                 const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
