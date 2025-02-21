@@ -38,11 +38,11 @@
                     </a>
 
 
-                        <a href="mailto:mr.adumatta@gmail.com">
-                            <button class="pill-button" type="submit">
-                                Reach Out To Me
-                            </button>
-                        </a>
+                    <a href="mailto:mr.adumatta@gmail.com">
+                        <button class="pill-button" type="submit">
+                            Reach Out To Me
+                        </button>
+                    </a>
 
                 </div>
             </nav>
@@ -61,7 +61,7 @@
                         <form class="d-flex" id="join-form">
                             <input class="form-field" style="font-size: small;" type="text"
                                 placeholder="Enter Your Email" />
-                            <button class="pill-button" style="font-size: small;" type="submit">
+                            <button class="pill-button" id="join-form-submit" style="font-size: small;" type="submit">
                                 Join
                             </button>
                         </form>
@@ -80,9 +80,10 @@
                             <ul class="list-unstyled">
                                 <li class="card" style="background-color: white; padding: 15px;">
                                     <a href="https://www.linkedin.com/in/adumatta/"
-                                        class="text-white me-3 d-flex align-items-center" >
+                                        class="text-white me-3 d-flex align-items-center">
                                         <i class="fab fa-linkedin fa-2x" style="color: black;"></i>
-                                        <h6 style="color: black; margin-bottom: 0; margin-left: 10px;">Nana Kweku Adumatta</h6>
+                                        <h6 style="color: black; margin-bottom: 0; margin-left: 10px;">Nana Kweku
+                                            Adumatta</h6>
                                     </a>
                                 </li>
                                 <li class="card" style="background-color: white; padding: 15px;">
@@ -366,6 +367,7 @@
                     .then(data => {
                         if (data.ok) {
                             alert("Message sent successfully!");
+                            form.reset();
                         } else {
                             alert("Failed to send message.");
                         }
@@ -377,6 +379,22 @@
             });
 
             const joinForm = document.getElementById("join-form");
+            const joinButton = document.getElementById("join-form-submit");
+            const emailInput = joinForm.querySelector('input[placeholder="Enter Your Email"]');
+
+            // Disable the join button initially
+            joinButton.disabled = true;
+
+            // Add event listener to the email input field
+            emailInput.addEventListener("input", function () {
+                if (emailInput.value.trim() !== "") {
+                    joinButton.disabled = false;
+                } else {
+                    joinButton.disabled = true;
+                }
+            });
+
+            // const joinForm = document.getElementById("join-form");
             joinForm.addEventListener("submit", function (event) {
                 event.preventDefault();
                 console.log("Join form submission prevented");
@@ -398,6 +416,7 @@
                         console.log("Response from Telegram API:", data);
                         if (data.ok) {
                             alert("Join request sent successfully!");
+                            joinForm.reset();
                         } else {
                             alert("Failed to send join request.");
                         }
